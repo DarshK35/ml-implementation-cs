@@ -1,6 +1,6 @@
 ﻿internal class Matrix {
 	float[,] data;
-	int rows, cols;
+	public int rows, cols;
 
 	// Constructors
 	public Matrix() {
