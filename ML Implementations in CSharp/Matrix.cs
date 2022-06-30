@@ -1,4 +1,4 @@
-﻿internal class Matrix {
+﻿public class Matrix {
 	float[,] data;
 	public int rows, cols;
 
