@@ -1,6 +1,4 @@
-﻿using System;
-
-public class SinglePerceptron {
+﻿public class SinglePerceptron {
 	Matrix input, weight, output;
 	int inputSize;
 	float bias;
@@ -60,7 +58,7 @@ public class SinglePerceptron {
 		weight = weight - delta;
 		bias = bias - error * learningRate;
 	}
-	Matrix[] predict(Matrix[] input) {
+	public Matrix[] predict(Matrix[] input) {
 		Matrix[] ret = new Matrix[input.Length];
 		for(int i = 0; i < input.Length; i++) {
 			ret[i] = new Matrix(1, 1);
@@ -69,7 +67,7 @@ public class SinglePerceptron {
 		}
 		return ret;
 	}
-	void train(Matrix[] input, Matrix[] output, int epochs) {
+	public void train(Matrix[] input, Matrix[] output, int epochs) {
 		float avgError;
 		Console.WriteLine("Starting training: " + input.Length + " over " + epochs + " epochs");
 
