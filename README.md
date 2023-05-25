@@ -5,3 +5,6 @@ Continuation of my ML Implementations in C++ repository, switched over to C# due
 To test out each ML method, capitalise m in main() method of the implementation file and run it using visual studio.
 
 [Old Repository](https://github.com/DarshK35/ML-Implementations-C-)
+
+## Running the code
+
