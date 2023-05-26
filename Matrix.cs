@@ -2,7 +2,7 @@
 
 public class Matrix {
 	// Data variables
-	public float[,] data;
+	public double[,] data;
 	public int rows, cols;
 	private Random rng;
 
@@ -10,27 +10,39 @@ public class Matrix {
 	public Matrix(bool fillRand = false) {
 		rows = 5;
 		cols = 5;
+		rng = new Random();
 		
-		data = new float[rows, cols];
+		data = new double[rows, cols];
 		if(fillRand) {
-			rng = new Random();
 			for(int i = 0; i < rows; i++) {
 				for(int j = 0; j < rows; j++) {
-					data[i, j] = (float)rng.NextDouble();
+					data[i, j] = (double)rng.NextDouble();
 				}
+			}
+		}
+	}
+	public Matrix(double[,] data) {
+		rows = data.GetLength(0);
+		cols = data.GetLength(1);
+		rng = new Random();
+
+		this.data = new double[rows, cols];
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				this.data[i, j] = data[i, j];
 			}
 		}
 	}
 	public Matrix(int r, int c, bool fillRand = false) {
 		rows = r;
 		cols = c;
+		rng = new Random();
 
-		data = new float[rows, cols];
+		data = new double[rows, cols];
 		if(fillRand) {
-			rng = new Random();
 			for(int i = 0; i < rows; i++) {
 				for(int j = 0; j < rows; j++) {
-					data[i, j] = (float)rng.NextDouble();
+					data[i, j] = (double)rng.NextDouble();
 				}
 			}
 		}
@@ -45,25 +57,61 @@ public class Matrix {
 				ret[i, j] = data[i, j];
 			}
 		}
+		return ret;
 	}
 
+	// Inverse
+	public Matrix inverse() {
+		// Initialize augmented matrix
+		Matrix augment = new Matrix(rows, cols * 2);
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				augment[i, j] = data[i, j];
+			}
+			augment[i, i + rows] = 1;
+		}
+
+		// Perform Gaussian elimination
+		for(int i = 0; i < rows; i++) {
+			double pivot = augment[i, i];
+
+			for(int j = 0; j < cols * 2; j++) {
+				augment[i, j] /= pivot;
+			}
+			for(int k = 0; k < rows; k++) {
+				if(i != k) {
+					double factor = augment[k, i];
+					for(int l = 0; l < cols * 2; l++) {
+						augment[k, l] -= factor * augment[i, l];
+					}
+				}
+			}
+		}
+
+		Matrix ret = this.copy();
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				ret[i, j] = augment[i, j + cols];
+			}
+		}
+		return ret;
+	}
 
 	// Indexing
-	public float this[int r, int c] {
+	public double this[int r, int c] {
 		get {
-			return data[rows, cols];
+			return data[r, c];
 		} set {
-			data[rows, cols] = value;
+			data[r, c] = value;
 		}
 	}
-
 
 	// Unary negation overload
 	public static Matrix operator- (Matrix a) {
 		Matrix ret = a.copy();
 		for(int i = 0; i < ret.rows; i++) {
 			for(int j = 0; j < ret.cols; j++) {
-				ret[i, j] = -ret[i, j];
+				ret[i, j] = -a[i, j];
 			}
 		}
 		return ret;
@@ -94,7 +142,7 @@ public class Matrix {
 		}
 		return ret;
 	}
-	public static Matrix operator+ (Matrix a, float b) {
+	public static Matrix operator+ (Matrix a, double b) {
 		Matrix ret = a.copy();
 		for(int i = 0; i < ret.rows; i++) {
 			for(int j = 0; j < ret.cols; j++) {
@@ -103,7 +151,7 @@ public class Matrix {
 		}
 		return ret;
 	}
-	public static Matrix operator+ (float a, Matrix b) {
+	public static Matrix operator+ (double a, Matrix b) {
 		return b + a;
 	}
 
@@ -111,10 +159,10 @@ public class Matrix {
 	public static Matrix operator- (Matrix a, Matrix b) {
 		return a + (-b);
 	}
-	public static Matrix operator- (Matrix a, float b) {
+	public static Matrix operator- (Matrix a, double b) {
 		return a + (-b);
 	}
-	public static Matrix operator- (float a, Matrix b) {
+	public static Matrix operator- (double a, Matrix b) {
 		return a + (-b);
 	}
 
@@ -135,7 +183,7 @@ public class Matrix {
 		}
 		return ret;
 	}
-	public static Matrix operator* (Matrix a, float b) {
+	public static Matrix operator* (Matrix a, double b) {
 		Matrix ret = a.copy();
 		for(int i = 0; i < ret.rows; i++) {
 			for(int j = 0; j < ret.cols; j++) {
@@ -144,7 +192,7 @@ public class Matrix {
 		}
 		return ret;
 	}
-	public static Matrix operator* (float a, Matrix b) {
+	public static Matrix operator* (double a, Matrix b) {
 		return b * a;
 	}
 

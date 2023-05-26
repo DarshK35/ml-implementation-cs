@@ -2,9 +2,21 @@
 
 Continuation of my ML Implementations in C++ repository, switched over to C# due to poor memory management in C++ when dealing with double pointers.
 
-To test out each ML method, capitalise m in main() method of the implementation file and run it using visual studio.
+## [Old Repository](https://github.com/DarshK35/ML-Implementations-C-)
 
-[Old Repository](https://github.com/DarshK35/ML-Implementations-C-)
+## Requirements
+* Microsoft .NET SDK 7.0
 
 ## Running the code
+### Clone this Repository
+
+```sh
+git clone https://github.com/DarshK35/ml-implementation-cs
+```
+
+### Run code using `dotnet` command
+
+```sh
+dotnet run
+```
 
