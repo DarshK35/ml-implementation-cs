@@ -1,6 +1,10 @@
 public class LinearRegression {
 	private Matrix coeffs;
 
+	public LinearRegression() {
+		coeffs = new Matrix();
+	}
+
 	public void Fit(Matrix x, Matrix y) {
 		x = AddBias(x);
 

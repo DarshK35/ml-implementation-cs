@@ -16,7 +16,7 @@ public class Matrix {
 		if(fillRand) {
 			for(int i = 0; i < rows; i++) {
 				for(int j = 0; j < rows; j++) {
-					data[i, j] = (double)rng.NextDouble();
+					data[i, j] = rng.NextDouble() * 2 - 1;
 				}
 			}
 		}
@@ -42,7 +42,7 @@ public class Matrix {
 		if(fillRand) {
 			for(int i = 0; i < rows; i++) {
 				for(int j = 0; j < rows; j++) {
-					data[i, j] = (double)rng.NextDouble();
+					data[i, j] = rng.NextDouble() * 2 - 1;
 				}
 			}
 		}
