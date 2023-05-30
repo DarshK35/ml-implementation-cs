@@ -8,15 +8,18 @@ Continuation of my ML Implementations in C++ repository, switched over to C# due
 * Microsoft .NET SDK 7.0
 
 ## Running the code
-### Clone this Repository
+### From Source Code
+#### Clone this Repository
 
 ```sh
 git clone https://github.com/DarshK35/ml-implementation-cs
 ```
 
-### Run code using `dotnet` command
+#### Run code using `dotnet` command
 
 ```sh
 dotnet run
 ```
 
+### Release version
+Coming soon
