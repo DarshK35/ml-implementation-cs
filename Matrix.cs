@@ -105,6 +105,19 @@ public class Matrix {
 			data[r, c] = value;
 		}
 	}
+	public Matrix this[int r] {
+		get {
+			Matrix ret = new Matrix(1, cols);
+			for(int i = 0; i < cols; i++) {
+				ret[0, i] = data[r, i];
+			}
+			return ret;
+		} set {
+			for(int i = 0; i < cols; i++) {
+				data[r, i] = value[0, i];
+			}
+		}
+	}
 
 	// Unary negation overload
 	public static Matrix operator- (Matrix a) {
