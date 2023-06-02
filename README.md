@@ -6,6 +6,7 @@ Continuation of my ML Implementations in C++ repository, switched over to C# due
 
 ## Requirements
 * Microsoft .NET SDK 7.0
+* Microsoft Visual Studio 2022
 
 ## Running the code
 ### From Source Code
@@ -15,11 +16,10 @@ Continuation of my ML Implementations in C++ repository, switched over to C# due
 git clone https://github.com/DarshK35/ml-implementation-cs
 ```
 
-#### Run code using `dotnet` command
+#### Open Project in Visual Studio
+`File > Open > Project/Solution` in VS menu
 
-```sh
-dotnet run
-```
+#### Run Code in Visual Studio
 
-### Release version
-Coming soon
+### Release Version
+#### Coming soon
