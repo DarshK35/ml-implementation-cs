@@ -23,3 +23,12 @@ git clone https://github.com/DarshK35/ml-implementation-cs
 
 ### Release Version
 #### Coming soon
+
+## Development Checklist
+
+- [x] Matrix Class
+- [x] Linear Regression Class
+- [x] Neural Network Class
+- [ ] SVM Class
+- [ ] Menu-based Driver Code
+- [ ] GPU Support (Maybe)
