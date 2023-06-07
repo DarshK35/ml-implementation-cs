@@ -28,7 +28,14 @@ git clone https://github.com/DarshK35/ml-implementation-cs
 
 - [x] Matrix Class
 - [x] Linear Regression Class
-- [x] Neural Network Class
-- [ ] SVM Class
+- [ ] Neural Network Class
+- [x] SVM Class
+- [ ] Extend SVM to SV Regressor and SV Classifier
+- [ ] Add functions for Model parameter reviewing
 - [ ] Menu-based Driver Code
 - [ ] GPU Support (Maybe)
+
+## Notes
+* Matrix class currently supports only matrix multiplication, Dot product is not supported yet
+* Neural Network class is still missing backpropogation function for tuning weights
+* SVM class expects single output variable
