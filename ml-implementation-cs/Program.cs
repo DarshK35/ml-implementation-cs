@@ -35,12 +35,14 @@ NeuralNetwork test = new NeuralNetwork(layers);
 Console.WriteLine("Neural Network defined");
 test.DebugOutput();
 Matrix input = new Matrix(1, 2, true);
-Matrix noutput = test.FeedForward(input);
+Matrix[] noutput = test.FeedForward(input, verbose: true);
 
 Console.WriteLine("\n\nTest Output:");
-for(int i = 0; i < noutput.rows; i++) {
-	for(int j = 0; j < noutput.cols; j++) {
-		Console.Write(noutput[i, j].ToString() + " ");
+for(int c = 0; c < noutput.Length; c++) {
+	for(int i = 0; i < noutput[c].rows; i++) {
+		for(int j = 0; j < noutput[c].cols; j++) {
+			Console.Write(noutput[c][i, j].ToString() + " ");
+		}
+		Console.Write("\n");
 	}
-	Console.Write("\n");
 }

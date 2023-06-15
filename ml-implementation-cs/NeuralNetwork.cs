@@ -4,10 +4,12 @@ public class NeuralNetwork {
 	private int[] layerSize;
 	private Matrix[] weights;
 	private Matrix[] bias;
+	private double learningRate;
 	private Random rng;
 
-	public NeuralNetwork(int[] layers) {
+	public NeuralNetwork(int[] layers, double lr = 0.13) {
 		this.layerSize = layers;
+		this.learningRate = lr;
 
 		weights = new Matrix[layers.Length - 1];
 		bias = new Matrix[layers.Length];
@@ -26,7 +28,7 @@ public class NeuralNetwork {
 	public Matrix Predict(Matrix data) {
 		Matrix output = new Matrix(data.rows, layerSize[layerSize.Length - 1]);
 		for(int i = 0; i < data.rows; i++) {
-			output[i] = FeedForward(data[i]);
+			output[i] = FeedForward(data[i])[weights.Length - 1];
 		}
 
 		return output;
@@ -34,21 +36,54 @@ public class NeuralNetwork {
 
 	public void Fit(Matrix data, Matrix expected, int epochs) {
 		for(int i = 0; i < data.rows; i++) {
-			Matrix actual = FeedForward(data[i]);
+			Matrix[] stepOutput = FeedForward(data[i]);
+			Matrix actual = stepOutput[weights.Length - 1];
 			Matrix error = expected[i] - actual;
 
 			for(int j = weights.Length - 1; j >= 0; j--) {
+				weights[j] -= learningRate * error;
 				Matrix prevDelta = error * !weights[j];
 			}
 		}
 	}
 
-	public Matrix FeedForward(Matrix data) {
-		Matrix layerOutput = ActivationFunction(data.copy() + bias[0]);
+	public Matrix[] FeedForward(Matrix data, bool verbose = false) {
+		Matrix[] layerOutput = new Matrix[weights.Length];
 
-		for(int i = 1; i < layerSize.Length; i++) {
-			layerOutput = layerOutput * weights[i - 1];
-			layerOutput = ActivationFunction(layerOutput + bias[i]);
+		layerOutput[0] = ActivationFunction((data.copy() + bias[0]) * weights[0]);
+		if(verbose) {
+			Console.WriteLine("\nInput Layer");
+			Console.WriteLine("Layer Output:");
+			for(int j = 0; j < layerOutput[0].rows; j++) {
+				for(int k = 0; k < layerOutput[0].cols; k++) {
+					Console.Write(layerOutput[0][j, k].ToString() + " ");
+				}
+				Console.Write("\n");
+			}
+		}
+
+		for(int i = 0; i < weights.Length - 1; i++) {
+			layerOutput[i + 1] = layerOutput[i];
+			layerOutput[i + 1] = ActivationFunction((layerOutput[i + 1] + bias[i +  1]) * weights[i + 1]);
+
+			if(!verbose) {
+				continue;
+			}
+			Console.WriteLine("\nLayer: " + (i + 1).ToString());
+			Console.WriteLine("Layer Input:");
+			for(int j = 0; j < layerOutput[i].rows; j++) {
+				for(int k = 0; k < layerOutput[i].cols; k++) {
+					Console.Write(layerOutput[i][j, k].ToString() + " ");
+				}
+				Console.Write("\n");
+			}
+			Console.WriteLine("Layer Output:");
+			for(int j = 0; j < layerOutput[i + 1].rows; j++) {
+				for(int k = 0; k < layerOutput[i + 1].cols; k++) {
+					Console.Write(layerOutput[i + 1][j, k].ToString() + " ");
+				}
+				Console.Write("\n");
+			}
 		}
 		return layerOutput;
 	}
