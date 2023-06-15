@@ -27,9 +27,18 @@ git clone https://github.com/DarshK35/ml-implementation-cs
 ## Development Checklist
 
 - [x] Matrix Class
+	- [x] Overloaded arithmetic functions
+	- [x] Array-like indexing
 - [x] Linear Regression Class
+	- [x] Statistics-based Fitting function
+	- [x] Support for multiple independent variables
 - [ ] Neural Network Class
-- [x] SVM Class
+	- [x] Prediction Function
+	- [ ] Actually Working Backpropogation Algorithm
+	- [ ] Training algorithm
+	- [ ] Multiple Loss function support
+	- [ ] Multiple Activation Function support for Neural Network (optional)
+- [x] Base SVM Class
 - [ ] Extend SVM to SV Regressor and SV Classifier
 - [ ] Add functions for Model parameter reviewing
 - [ ] Menu-based Driver Code
