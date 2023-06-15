@@ -144,7 +144,9 @@ public class Matrix {
 	// Addition operation overloads
 	public static Matrix operator+ (Matrix a, Matrix b) {
 		if(!(a.rows == b.rows && a.cols == b.cols)) {
-			throw new ArithmeticException("Cannot add unequal size matrices");
+			throw new ArithmeticException("Cannot add unequal size matrices" + 
+				"\n Matrix A dimension: " + a.rows.ToString() + " " + a.cols.ToString() + 
+				"\n Matrix B dimension: " + b.rows.ToString() + " " + b.cols.ToString());
 		}
 
 		Matrix ret = a.copy();
@@ -182,7 +184,9 @@ public class Matrix {
 	// Multiplication operation overloads
 	public static Matrix operator* (Matrix a, Matrix b) {
 		if(a.cols != b.rows) {
-			throw new ArithmeticException("Matrix A columns should be same length as Matrix B rows");
+			throw new ArithmeticException("Matrix A columns should be same length as Matrix B rows" +
+				"\n Matrix A dimension: " + a.rows.ToString() + " " + a.cols.ToString() +
+				"\n Matrix B dimension: " + b.rows.ToString() + " " + b.cols.ToString());
 		}
 
 		Matrix ret = new Matrix(a.rows, b.cols);
