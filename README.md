@@ -32,14 +32,14 @@ git clone https://github.com/DarshK35/ml-implementation-cs
 - [x] Linear Regression Class
 	- [x] Statistics-based Fitting function
 	- [x] Support for multiple independent variables
-- [ ] Neural Network Class
+- [x] Neural Network Class
 	- [x] Prediction Function
-	- [ ] Actually Working Backpropogation Algorithm
-	- [ ] Training algorithm
-	- [ ] Multiple Loss function support
+	- [x] Actually Working Backpropogation Algorithm
+	- [x] Training algorithm
+	- [ ] Multiple Loss function support (optional)
 	- [ ] Multiple Activation Function support for Neural Network (optional)
 - [x] Base SVM Class
-- [ ] Extend SVM to SV Regressor and SV Classifier
+	- [ ] Extend SVM to SV Regressor and SV Classifier
 - [ ] Add functions for Model parameter reviewing
 - [ ] Menu-based Driver Code
 - [ ] GPU Support (Maybe)
