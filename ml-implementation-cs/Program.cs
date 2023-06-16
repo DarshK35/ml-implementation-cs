@@ -1,5 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Net.Http.Headers;
+using System;
+
 Console.WriteLine("\nLinear Regression Test:\n");
 double[,] data = {
 	{1, 2},
@@ -31,18 +34,28 @@ Console.WriteLine("Test Output: " + testOutput[0, 0].ToString());
 
 Console.WriteLine("\nNeural Network Code testing");
 int[] layers = { 2, 4, 5, 1 };
-NeuralNetwork test = new NeuralNetwork(layers);
+NeuralNetwork test = new NeuralNetwork(layers, 0.01);
 Console.WriteLine("Neural Network defined");
 test.DebugOutput();
-Matrix input = new Matrix(1, 2, true);
-Matrix[] noutput = test.FeedForward(input, verbose: true);
+
+// Generating Random data
+Matrix nnInput = (new Matrix(10, 2, true)) * 20 - 10;
+Matrix nnOutput = new Matrix(10, 1, true);
+for(int i = 0; i < nnOutput.rows; i++) {
+	nnOutput[i, 0] = (nnOutput[i, 0] >= 0) ? 1 : -1;
+}
+testData = new Matrix(1, 2, true) * 20 - 10;
+Matrix nnPred;
 
 Console.WriteLine("\n\nTest Output:");
-for(int c = 0; c < noutput.Length; c++) {
-	for(int i = 0; i < noutput[c].rows; i++) {
-		for(int j = 0; j < noutput[c].cols; j++) {
-			Console.Write(noutput[c][i, j].ToString() + " ");
-		}
-		Console.Write("\n");
-	}
-}
+nnPred = test.Predict(testData);
+nnPred.print();
+
+Console.WriteLine("Training...");
+test.Fit(nnInput, nnOutput, 5);
+
+
+nnPred = test.Predict(testData);
+Console.WriteLine("\n\nTest Output:");
+nnPred.print();
+//test.DebugOutput();

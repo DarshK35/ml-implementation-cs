@@ -34,15 +34,48 @@ public class NeuralNetwork {
 		return output;
 	}
 
-	public void Fit(Matrix data, Matrix expected, int epochs) {
-		for(int i = 0; i < data.rows; i++) {
-			Matrix[] stepOutput = FeedForward(data[i]);
-			Matrix actual = stepOutput[weights.Length - 1];
-			Matrix error = expected[i] - actual;
+	public void Fit(Matrix data, Matrix expected, int epochs, bool verbose = false) {
+		for(int e = 0; e < epochs; e++) {
+			Console.Write("\nEpoch: " + (e + 1).ToString() + " / " + epochs.ToString());
+			for(int i = 0; i < data.rows; i++) {
+				if(verbose) {
+					Console.WriteLine("\nData point: " + (i + 1).ToString() + " / " + data.rows.ToString());
+				}
+				
+				Matrix[] stepOutput = FeedForward(data[i]);
+				Matrix[] error = new Matrix[stepOutput.Length];
+				Matrix[] newWeights = new Matrix[weights.Length];
+				Matrix tp = expected[i] - stepOutput[stepOutput.Length - 1];
+				if(verbose) {
+					Console.WriteLine("Variables set");
+				}
 
-			for(int j = weights.Length - 1; j >= 0; j--) {
-				weights[j] -= learningRate * error;
-				Matrix prevDelta = error * !weights[j];
+				error[error.Length - 1] = Matrix.ScalarMultiply(tp, tp) / 2.0;
+				if(verbose) {
+					Console.WriteLine("Error assigned, proceeding with weight tuning");
+				}
+
+				for(int o = stepOutput.Length - 1; o > 0; o--) {
+					if(verbose) {
+						Console.WriteLine("Tuning Weight: " + (o + 1).ToString() + " / " + weights.Length.ToString() + "\nOld Weight: ");
+						weights[o].print();
+						Console.WriteLine("Error:");
+						error[o].print();
+						Console.WriteLine("Layer Input: ");
+						stepOutput[o - 1].print();
+					}
+					newWeights[o] = weights[o] - learningRate * !(!error[o] * ActivationDerivative(stepOutput[o - 1]));
+					error[o - 1] = error[o] * !weights[o];
+					if(verbose) {
+						Console.WriteLine("Error propogated");
+					}
+				}
+
+				newWeights[0] = weights[0] - learningRate * !(!error[0] * ActivationDerivative(data[i]));
+
+				for(int w = 0; w < weights.Length; w++) {
+					weights[w] = newWeights[w];
+				}
 			}
 		}
 	}
@@ -98,7 +131,7 @@ public class NeuralNetwork {
 		}
 		return ret;
 	}
-	private Matrix ActivationDerivative(Matrix data) {
+	public Matrix ActivationDerivative(Matrix data) {
 		Matrix ret = data.copy();
 		for(int i = 0; i < data.rows; i++) {
 			for(int j = 0; j < data.cols; j++) {
