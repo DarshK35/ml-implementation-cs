@@ -60,6 +60,16 @@ public class Matrix {
 		return ret;
 	}
 
+	// Printing
+	public void print() {
+		for(int i = 0; i < rows; i++) {
+			for(int j = 0; j < cols; j++) {
+				Console.Write(data[i, j].ToString() + " ");
+			}
+			Console.Write("\n");
+		}
+	}
+
 	// Inverse
 	public Matrix inverse() {
 		// Initialize augmented matrix
