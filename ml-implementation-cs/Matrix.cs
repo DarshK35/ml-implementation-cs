@@ -97,6 +97,23 @@ public class Matrix {
 		return ret;
 	}
 
+	// Scalar Multiplication
+	public static Matrix Scalar(Matrix a, Matrix b) {
+		if(!(a.rows == b.rows && a.cols == b.cols)) {
+			throw new ArithmeticException("Cannot add unequal size matrices" +
+				"\n Matrix A dimension: " + a.rows.ToString() + " " + a.cols.ToString() +
+				"\n Matrix B dimension: " + b.rows.ToString() + " " + b.cols.ToString());
+		}
+
+		Matrix ret = a.copy();
+		for(int i = 0; i < ret.rows; i++) {
+			for(int j = 0; j < ret.cols; j++) {
+				ret[i, j] *= b[i, j];
+			}
+		}
+		return ret;
+	}
+
 	// Indexing
 	public double this[int r, int c] {
 		get {
