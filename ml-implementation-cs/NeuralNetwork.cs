@@ -7,7 +7,7 @@ public class NeuralNetwork {
 	private double learningRate;
 	private Random rng;
 
-	public NeuralNetwork(int[] layers, double lr = 0.13) {
+	public NeuralNetwork(int[] layers, double lr = 0.12) {
 		this.layerSize = layers;
 		this.learningRate = lr;
 
@@ -37,6 +37,7 @@ public class NeuralNetwork {
 	public void Fit(Matrix data, Matrix expected, int epochs, bool verbose = false) {
 		for(int e = 0; e < epochs; e++) {
 			Console.Write("\nEpoch: " + (e + 1).ToString() + " / " + epochs.ToString());
+			double avgError = 0;
 			for(int i = 0; i < data.rows; i++) {
 				if(verbose) {
 					Console.WriteLine("\nData point: " + (i + 1).ToString() + " / " + data.rows.ToString());
@@ -64,14 +65,14 @@ public class NeuralNetwork {
 						Console.WriteLine("Layer Input: ");
 						stepOutput[o - 1].print();
 					}
-					newWeights[o] = weights[o] - learningRate * !(!error[o] * ActivationDerivative(stepOutput[o - 1]));
-					error[o - 1] = error[o] * !weights[o];
+					newWeights[o] = weights[o] - learningRate * !(!error[o] * stepOutput[o - 1]);
+					error[o - 1] = ActivationDerivative(error[o]) * !weights[o];
 					if(verbose) {
 						Console.WriteLine("Error propogated");
 					}
 				}
 
-				newWeights[0] = weights[0] - learningRate * !(!error[0] * ActivationDerivative(data[i]));
+				newWeights[0] = weights[0] - learningRate * !(!error[0] * data[i]);
 
 				for(int w = 0; w < weights.Length; w++) {
 					weights[w] = newWeights[w];
