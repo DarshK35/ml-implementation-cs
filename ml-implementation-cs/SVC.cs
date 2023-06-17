@@ -1,4 +1,4 @@
-﻿public class SVM {
+﻿public class SVC {
 	public Matrix W;
 	public double b;
 	public double learningRate;

@@ -1,3 +1,5 @@
+using System.Xml.Schema;
+
 public class LinearRegression {
 	private Matrix coeffs;
 
@@ -30,5 +32,12 @@ public class LinearRegression {
 			}
 		}
 		return ret;
+	}
+
+	public void DebugView() {
+		Console.WriteLine("Model type: Linear Regression");
+		Console.WriteLine("Model Parameters:");
+		coeffs.print();
+
 	}
 }
