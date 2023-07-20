@@ -33,25 +33,20 @@ Console.WriteLine("Test Output: ");
 testOutput.print();
 
 
-Console.WriteLine("\nNeural Network Code testing");
-int[] layers = { 4, 4, 5, 1 };
-NeuralNetwork test = new NeuralNetwork(layers, 0.07);
-Console.WriteLine("Neural Network defined");
+Console.WriteLine("\nSVM Code testing");
+SVC test = new SVC(4, 0.01, 0.01);
+Console.WriteLine("SVM defined");
 test.DebugOutput();
 
-// Generating 4 variable boolean data
-Matrix nnInput = new Matrix(16, 4);
+// Generating 4 variable 2 class data
+Matrix nnInput = new Matrix(16, 4, true) * 5;
 Matrix nnOutput = new Matrix(16, 1);
-testData = new Matrix(3, 4, true);
+testData = new Matrix(3, 4, true) * 5;
 Matrix nnPred;
 
 for(int i = 0; i < 16; i++) {
-	string bin = Convert.ToString(i, 2).PadLeft(4, '0');
-	for(int j = 0; j < 4; j++) {
-		nnInput[i, j] = (bin[j] == '0') ? -1 : 1;
-	}
-
-	if((nnInput[i, 0] > 0 || nnInput[i, 2] > 0) && nnInput[i, 1] > 0 && nnInput[i, 3] < 0) {
+	double t = nnInput[i, 0] + nnInput[i, 1] - 2 * nnInput[i, 2] + nnInput[i, 3];
+	if(t > 0) {
 		nnOutput[i, 0] = 1;
 	} else {
 		nnOutput[i, 0] = -1;
