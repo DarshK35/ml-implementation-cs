@@ -38,7 +38,8 @@ git clone https://github.com/DarshK35/ml-implementation-cs
 	- [x] Training algorithm
 	- [ ] Multiple Loss function support (optional)
 	- [ ] Multiple Activation Function support for Neural Network (optional)
-- [ ] Linear SVM Classifier Class
+- [x] Linear SVM Classifier Class
+	- [ ] Multiple kernel function support
 - [x] Add functions for Model parameter reviewing
 - [ ] Menu-based Driver Code
 - [ ] GPU Support (Maybe)
