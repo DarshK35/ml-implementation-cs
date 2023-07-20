@@ -146,23 +146,13 @@ public class NeuralNetwork {
 		Console.WriteLine("Bias:");
 		for(int c = 0; c < bias.Length; c++) {
 			Console.WriteLine((c + 1).ToString() + ":");
-			for(int i = 0; i < bias[c].rows; i++) {
-				for(int j = 0; j < bias[c].cols; j++) {
-					Console.Write(bias[c][i, j].ToString() + " ");
-				}
-				Console.Write("\n");
-			}
+			bias[c].print();
 		}
 
 		Console.WriteLine("Weights:");
 		for(int c = 0; c < weights.Length; c++) {
 			Console.WriteLine((c + 1).ToString() + ":");
-			for(int i = 0; i < weights[c].rows; i++) {
-				for(int j = 0; j < weights[c].cols; j++) {
-					Console.Write(weights[c][i, j].ToString() + " ");
-				}
-				Console.Write("\n");
-			}
+			weights[c].print();
 		}
 	}
 }
