@@ -17,9 +17,16 @@ git clone https://github.com/DarshK35/ml-implementation-cs
 ```
 
 #### Open Project in Visual Studio
-`File > Open > Project/Solution` in VS menu
+Select `File > Open > Project/Solution` in VS menu, then navigate to `ml-implementation-cs.sln` file cloned with the repo.
 
 #### Run Code in Visual Studio
+The code can be run using either of the following methods:
+
+- `Debug > Start without Debugging` in VS Menu
+- `Ctrl + F5` shortcut key
+
+Debugging can be left disabled for running this project, unless contributing to the code.
+
 
 ### Release Version
 #### Coming soon
@@ -47,4 +54,5 @@ git clone https://github.com/DarshK35/ml-implementation-cs
 ## Notes
 * Matrix class currently supports only matrix multiplication, Dot product is not supported yet
 * Neural Network class is only useful for classification tasks, Regression tasks will be handled by separate activation function
-* SVM class expects single output variable
+* SVC class expects single output variable
+* Kernel functions yet to be implemented
